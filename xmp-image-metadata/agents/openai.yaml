@@ -1,0 +1,4 @@
+interface:
+  display_name: "Portable XMP Image Metadata"
+  short_description: "Add verified image metadata safely"
+  default_prompt: "Use $xmp-image-metadata-portable to add verified metadata to this image."
