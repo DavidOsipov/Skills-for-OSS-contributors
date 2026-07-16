@@ -1,0 +1,18 @@
+creator: {name: "Test Creator", full_name: "Test Creator", authors_position: "Photographer"}
+contact: {email: "test@example.org", url: "https://example.org", city: "Tbilisi", country: "Georgia"}
+identifiers: {isni_spaced: "0000 0000 0000 0000"}
+identity_keywords: ["Test Creator"]
+rights: {owner: "Test Creator"}
+default_license: "CC-BY-4.0"
+plus: {supplier_name: "Test Creator", supplier_id: "https://example.org"}
+defaults: {creator_tool: "ExifTool", digital_source_type: "digitalCapture", timezone: "+04:00"}
+known_persons:
+  aliases: {}
+  "Test Creator": {ids: ["https://example.org/#me"], description: "A test person."}
+license_presets:
+  CC-BY-4.0:
+    name: "CC BY 4.0"
+    url: "https://creativecommons.org/licenses/by/4.0/"
+    deed: "https://creativecommons.org/licenses/by/4.0/deed.en"
+    rights_line: "© {year} {creator}. Licensed under CC BY 4.0"
+    instructions: "This work is licensed under CC BY 4.0."

@@ -1,0 +1,22 @@
+# Quality configuration for the image-metadata skill scripts.
+#   python3 -m ruff check scripts tests
+#   python3 -m mypy --ignore-missing-imports --disallow-untyped-defs scripts
+#   python3 -m pytest tests -q
+[tool.ruff]
+line-length = 110
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "S"]
+# E501: black governs line length. S404/S603: subprocess is intentional (list args, never shell=True).
+# S310: every urlopen validates the URL scheme/host before opening.
+ignore = ["E501", "S404", "S603", "S310"]
+
+[tool.mypy]
+python_version = "3.9"
+disallow_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = false
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "E402", "S318"]  # asserts, post-sys.path imports, and parsing the skill's OWN generated XMP are expected in tests
