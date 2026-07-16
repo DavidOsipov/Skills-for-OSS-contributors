@@ -1,4 +1,0 @@
-interface:
-  display_name: "Portable XMP Image Metadata"
-  short_description: "Verify, geocode, and embed image metadata"
-  default_prompt: "Use $xmp-image-metadata-portable to inspect, reverse-geocode, and safely add verified image metadata."
