@@ -39,6 +39,15 @@ never the `subj:` / `scn:` / `medtop:` prefix.
 `country_code` is ISO 3166-1 alpha-2. If `location_created` is omitted it is built
 from `city`/`state`/`country`/`country_code`/`sublocation`.
 
+### Reverse-geocoding GPS
+`scripts/geocode.py` uses ExifTool's local GeoLocation database by default to turn
+confirmed GPS into reviewable `city`, `state`, `country`, and `country_code` candidates.
+It does **not** modify the spec or image, and the offline lookup sends no coordinates online.
+It returns the nearest GeoNames feature, which is still not proof of capture or depicted
+location. Use an online provider only with explicit permission; retain its cache and copy
+only fields the user confirms. Its default online zoom is city-level; use a more precise zoom
+only when the user needs it and approves disclosing the precision.
+
 ## People
 | Field | XMP target | Notes |
 |---|---|---|
