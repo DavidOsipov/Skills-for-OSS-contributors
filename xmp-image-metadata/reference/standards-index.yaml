@@ -1,0 +1,200 @@
+schema_version: 1
+last_reviewed: "2026-07-22"
+
+# This registry is deliberately metadata-only for restricted standards. The
+# public skill does not redistribute ISO or CIPA PDFs. Use ExifTool for file
+# operations and consult a local, licensed normative copy only when a semantic
+# or representation question cannot be resolved from the bundled IPTC sources.
+policy:
+  implementation_authority: "ExifTool CLI and its installed version"
+  semantic_authority: "The applicable normative standard listed below"
+  public_restricted_documents: "URL-only; acquire locally and review terms"
+  public_bundle_excludes:
+    - "ISO standards and ISO-derived PDFs"
+    - "CIPA DC-008-2026 and DC-010-2026 PDFs"
+
+standards:
+  - id: iptc-photo-metadata-2025.1
+    title: "IPTC Photo Metadata Standard"
+    version: "2025.1 revision 1"
+    publication_date: "2025-11-26"
+    authority: IPTC
+    normative: true
+    source_url: "https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata-2025.1.html"
+    license: "CC BY 4.0"
+    redistribution: "bundled-with-attribution"
+    bundled_files:
+      - reference/iptc/standard-2025.1.html
+      - reference/iptc/techreference-2025.1.json
+      - reference/iptc/techreference-2025.1.yaml
+    applies_to: [IPTC Core, IPTC Extension, AI disclosure, PLUS-linked fields]
+
+  - id: iptc-mapping-guidelines-2023.1
+    title: "IPTC Photo Metadata Mapping Guidelines"
+    version: "2023.1"
+    publication_date: "2023-10-30"
+    authority: IPTC
+    normative: false
+    source_url: "https://iptc.org/std/photometadata/documentation/mappingguidelines/"
+    license: "CC BY 4.0"
+    redistribution: "bundled-with-attribution"
+    bundled_files:
+      - reference/iptc/mapping-guidelines-2023.1.html
+    applies_to: [XMP, IPTC-IIM, Exif, Schema.org reconciliation]
+
+  - id: iptc-iim-4.2
+    title: "IPTC-NAA Information Interchange Model"
+    version: "4.2"
+    authority: IPTC
+    normative: true
+    source_url: "https://www.iptc.org/std/IIM/4.2/specification/IIMV4.2.pdf"
+    redistribution: "review-before-bundling"
+    bundled: false
+    local_copy: optional
+    applies_to: [legacy IPTC-IIM synchronization]
+
+  - id: xmp-part-1-iso-16684-1-2019
+    title: "XMP Part 1: Data model, serialization and core properties"
+    version: "2019"
+    authority: ISO
+    normative: true
+    source_url: "https://www.iso.org/standard/75163.html"
+    redistribution: restricted
+    bundled: false
+    local_copy: optional
+    applies_to: [RDF model, arrays, language alternatives, packet serialization]
+
+  - id: xmp-part-1-adobe-2012
+    title: "Adobe XMP Specification Part 1"
+    version: "2012"
+    authority: Adobe
+    normative: false
+    source_url: "https://github.com/adobe/XMP-Toolkit-SDK/blob/main/docs/XMPSpecificationPart1.pdf"
+    redistribution: "follow-source-terms"
+    bundled: false
+    applies_to: [implementation background; not the current ISO edition]
+
+  - id: xmp-part-2-2022
+    title: "Adobe XMP Specification Part 2: Additional Properties"
+    version: "2022-02"
+    authority: Adobe
+    normative: false
+    source_url: "https://github.com/adobe/XMP-Toolkit-SDK/blob/main/docs/XMPSpecificationPart2.pdf"
+    redistribution: "follow-source-terms"
+    bundled: false
+    local_copy: optional
+    applies_to: [Dublin Core, XMP Rights, Photoshop, TIFF, Exif, structured XMP types]
+
+  - id: xmp-part-3-2020
+    title: "Adobe XMP Specification Part 3: Storage in Files"
+    version: "2020-01"
+    authority: Adobe
+    normative: false
+    source_url: "https://github.com/adobe/XMP-Toolkit-SDK/blob/main/docs/XMPSpecificationPart3.pdf"
+    redistribution: "follow-source-terms"
+    bundled: false
+    local_copy: optional
+    applies_to: [native embedding, extended XMP, reconciliation, file updates]
+
+  - id: cipa-dc-008-2026
+    title: "Exchangeable image file format for digital still cameras: Exif Version 3.1"
+    version: "3.1"
+    publication_date: "2026-01-30"
+    authority: CIPA
+    normative: true
+    source_url: "https://www.cipa.jp/e/std/std-sec.html"
+    manual_acceptance_required: true
+    redistribution: "review-required"
+    bundled: false
+    local_copy: optional
+    applies_to: [native Exif tags, TIFF/IFD, JPEG APP1, GPS, timestamps]
+
+  - id: cipa-dc-010-2026
+    title: "Exif metadata for XMP"
+    version: "2026"
+    publication_date: "2026-06-01"
+    authority: CIPA
+    normative: true
+    source_url: "https://www.cipa.jp/e/std/std-sec.html"
+    manual_acceptance_required: true
+    redistribution: "review-required"
+    bundled: false
+    local_copy: optional
+    applies_to: [Exif-to-XMP property and value mappings]
+
+  - id: plus-ldf-xmp-2.0.1
+    title: "PLUS License Data Format: XMP Reference"
+    version: "2.0.1"
+    authority: PLUS
+    normative: true
+    source_url: "https://ns.useplus.org/LDF/ldf-XMPSpecification"
+    redistribution: "follow-plus-terms"
+    bundled: false
+    local_copy: optional
+    applies_to: [ImageCreator, ImageSupplier, CopyrightOwner, Licensor, release status]
+
+  - id: png-third-edition
+    title: "PNG Specification, Third Edition"
+    version: "3"
+    authority: W3C
+    normative: true
+    source_url: "https://www.w3.org/TR/png-3/"
+    redistribution: "follow-source-terms"
+    bundled: false
+    applies_to: [PNG eXIf chunk, iTXt/XMP storage]
+
+  - id: webp-riff-container
+    title: "WebP Container Specification"
+    version: "current online edition"
+    authority: Google
+    normative: true
+    source_url: "https://developers.google.com/speed/webp/docs/riff_container"
+    redistribution: "follow-source-terms"
+    bundled: false
+    applies_to: [EXIF chunk, XMP chunk, VP8X flags]
+
+  - id: avif-1.2.0
+    title: "AV1 Image File Format"
+    version: "1.2.0"
+    authority: Alliance for Open Media
+    normative: true
+    source_url: "https://aomediacodec.github.io/av1-avif/v1.2.0.html"
+    redistribution: "follow-source-terms"
+    bundled: false
+    applies_to: [AVIF metadata items and associations]
+
+  - id: heif-iso-23008-12-2025
+    title: "Image File Format / HEIF"
+    version: "2025"
+    authority: ISO/IEC
+    normative: true
+    source_url: "https://www.iso.org/standard/89035.html"
+    redistribution: restricted
+    bundled: false
+    local_copy: optional
+    applies_to: [HEIF/HEIC metadata items and associations]
+
+  - id: isobmff-iso-14496-12-2026
+    title: "ISO Base Media File Format"
+    version: "2026"
+    authority: ISO/IEC
+    normative: true
+    source_url: "https://www.iso.org/standard/85596.html"
+    redistribution: restricted
+    bundled: false
+    local_copy: optional
+    applies_to: [AVIF/HEIF box and item infrastructure]
+
+  - id: exiftool-cli
+    title: "ExifTool command-line and Perl API documentation"
+    version: "bundled documentation snapshot"
+    authority: ExifTool
+    normative: false
+    source_url: "https://exiftool.org/"
+    redistribution: "follow-source-terms"
+    bundled_files:
+      - reference/exiftool-docs/ExifTool.pdf
+      - reference/exiftool-docs/ExifTool.md
+      - reference/exiftool-docs/exiftool_pod.pdf
+      - reference/exiftool-docs/exiftool_pod.md
+    applies_to: [read/write syntax, tag names, format capability, validation, geolocation]

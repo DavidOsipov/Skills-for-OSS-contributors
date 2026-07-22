@@ -115,8 +115,11 @@ specific preset to that private profile only after the user confirms its terms.
 ## EXIF (camera/technical) — not spec fields
 Camera and exposure data (Make, Model, LensModel, ExposureTime, FNumber, ISO,
 FocalLength, ColorSpace, Orientation) are **not** set in the spec. They come from the
-image's own EXIF and are mirrored into XMP by `embed_xmp.py` (on by default; `--no-sync` to skip). To harvest a
-source photo's EXIF (date, GPS, dimensions, camera) for review before building,
-use `read_exif.py --image X`; do not use `--merge` until each intended field is approved.
-The default embed also writes the
-authoritative XMP values back out to EXIF and IPTC-IIM so all three containers agree.
+image's own EXIF and are mirrored into XMP by `embed_xmp.py` (on by default; `--no-sync` to skip).
+`read_exif.py --image X` also reports the native `exif_version` for review; it is not
+copied blindly into a new file. The builder preserves a valid native Exif version when
+`--image` is supplied. During a synchronized write, ExifTool preserves an existing
+native version, or writes CIPA Exif 3.1's `0300` marker when creating the Exif block,
+and copies XMP dimensions to `ExifImageWidth`/`ExifImageHeight`. Do not use `--merge`
+until each intended field is approved. The default embed writes the authoritative XMP
+values back out to EXIF and IPTC-IIM so all three containers agree.

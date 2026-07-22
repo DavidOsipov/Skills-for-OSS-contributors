@@ -1,5 +1,5 @@
 creator: {name: "Test Creator", full_name: "Test Creator", authors_position: "Photographer"}
-contact: {email: "test@example.org", url: "https://example.org", city: "Tbilisi", country: "Georgia"}
+contact: {email: "test@example.org", url: "https://example.org", city: "Example City", country: "Example Country"}
 identifiers: {isni_spaced: "0000 0000 0000 0000"}
 identity_keywords: ["Test Creator"]
 rights: {owner: "Test Creator"}

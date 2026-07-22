@@ -4,31 +4,38 @@
   "documents": {
     "techreference-2025.1.json": {
       "source_url": "https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2025.1.json",
-      "bytes": 140839
+      "bytes": 140839,
+      "sha256": "592c37b01fe02c7333cd7059a212bdceee13c1147ad7bcc6dbe996ba433128a8"
     },
     "techreference-2025.1.yaml": {
       "source_url": "https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2025.1.yml",
-      "bytes": 98832
+      "bytes": 98832,
+      "sha256": "43a49387c49957e3afced3d31d30a054f541a992ad638d79bcaf0e987736dfd1"
     },
     "standard-2025.1.html": {
       "source_url": "https://iptc.org/std/photometadata/specification/IPTC-PhotoMetadata-2025.1.html",
-      "bytes": 537817
+      "bytes": 537817,
+      "sha256": "275a1717429f2208c608b92805d6fc7aebdebc3c1ed05d1f97373832d5913320"
     },
     "user-guide.html": {
       "source_url": "https://www.iptc.org/std/photometadata/documentation/userguide/",
-      "bytes": 349064
+      "bytes": 349064,
+      "sha256": "0a8a0c47b9c3c75154b57510ea1dc8c59dcb6a1529022e43e0b3300a9cbb158b"
     },
     "mapping-guidelines-2023.1.html": {
       "source_url": "https://iptc.org/std/photometadata/documentation/mappingguidelines/",
-      "bytes": 108650
+      "bytes": 108650,
+      "sha256": "e77724fb99d098b1f8cd3b240604afd497faa5f1c70b2d6e9481f046bfa7bcf2"
     },
     "techreference-documentation-1.2.html": {
       "source_url": "https://iptc.org/std/photometadata/documentation/techreference/",
-      "bytes": 79733
+      "bytes": 79733,
+      "sha256": "8140573999adcf6d17acf46ea0f29e3bbbe727749de72c0160532589afeffc48"
     },
     "google-images-quick-guide.html": {
       "source_url": "https://iptc.org/standards/photo-metadata/quick-guide-to-iptc-photo-metadata-and-google-images/",
-      "bytes": 180536
+      "bytes": 180536,
+      "sha256": "3ea68b9d6624039060713299c55dc06d2e49e16cd698219ce1a9da80872c776b"
     }
   },
   "vocabularies": {
@@ -36,25 +43,33 @@
       "source_url": "https://cv.iptc.org/newscodes/subjectcode/?format=json&lang=en-US",
       "release_timestamp": "2022-06-14T12:00:00+00:00",
       "entries": 1404,
-      "file": "reference/iptc_subject_codes.tsv"
+      "file": "reference/iptc_subject_codes.tsv",
+      "bytes": 150059,
+      "sha256": "dfa7ec46f9ee3266bde9705b92d30c478bdf8a3e66c8020d80cd592586ee8ad9"
     },
     "scene": {
       "source_url": "https://cv.iptc.org/newscodes/scene/?format=json&lang=en-US",
       "release_timestamp": "2018-01-25T14:09:00+00:00",
       "entries": 24,
-      "file": "reference/iptc_scene_codes.tsv"
+      "file": "reference/iptc_scene_codes.tsv",
+      "bytes": 1863,
+      "sha256": "d42e9f27cbdc211ce25b129f8308f371483fcf5709a19089c223fd5fdd1da5db"
     },
     "media": {
       "source_url": "https://cv.iptc.org/newscodes/mediatopic/?format=json&lang=en-US",
       "release_timestamp": "2026-07-02T12:00:00+00:00",
       "entries": 1393,
-      "file": "reference/iptc_media_topics.tsv"
+      "file": "reference/iptc_media_topics.tsv",
+      "bytes": 239392,
+      "sha256": "c79383c654bf2729528c60258b3d0922668f38a9da1f5002efcabeb0837dcb01"
     },
     "source": {
       "source_url": "https://cv.iptc.org/newscodes/digitalsourcetype/?format=json&lang=en-US",
       "release_timestamp": "2024-10-23T12:00:00+00:00",
       "entries": 20,
-      "file": "reference/iptc_digital_source_types.tsv"
+      "file": "reference/iptc_digital_source_types.tsv",
+      "bytes": 5017,
+      "sha256": "29f70e9c91f848778b3c6dc78ad989d08e823763b780afdcc96c2cf5d6fc4b77"
     }
   }
 }

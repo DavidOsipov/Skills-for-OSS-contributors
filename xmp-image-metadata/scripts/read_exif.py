@@ -6,6 +6,7 @@
 
 Output keys line up with build_xmp.py's spec: width, height, format, date_created,
 gps{lat,lon,alt}, camera{make,model,lens}, exposure{...}, orientation, color_space.
+The read-only `exif_version` value is included for review; it is not a builder input.
 Every value is untrusted and possibly stale or forged: review before use. --merge
 fills only missing fields and is not verification.
 """
@@ -41,6 +42,7 @@ TAGS = [
     "-EXIF:DateTimeOriginal",
     "-EXIF:CreateDate",
     "-EXIF:ModifyDate",
+    "-EXIF:ExifVersion",
     "-Composite:GPSLatitude",
     "-Composite:GPSLongitude",
     "-EXIF:GPSAltitude",
@@ -56,8 +58,11 @@ def harvest(cmd: list[str], image: str) -> dict[str, Any]:
         [*cmd, "-j", "-n", "-G0", *TAGS, _common.safe_arg(image)],
         capture_output=True,
         text=True,
+        check=False,
         timeout=120,
     )
+    if proc.returncode != 0:
+        raise RuntimeError(proc.stderr.strip() or "ExifTool could not read the image")
     data: dict[str, Any] = (
         json.loads(proc.stdout)[0] if proc.stdout.strip().startswith("[") else {}
     )
@@ -81,6 +86,9 @@ def harvest(cmd: list[str], image: str) -> dict[str, Any]:
     dto = g("DateTimeOriginal") or g("CreateDate")
     if dto:
         out["date_created"] = str(dto)[:10].replace(":", "-")
+    exif_version = g("ExifVersion")
+    if exif_version and str(exif_version).isdigit() and len(str(exif_version)) == 4:
+        out["exif_version"] = str(exif_version)
     lat, lon, alt = g("GPSLatitude"), g("GPSLongitude"), g("GPSAltitude")
     if lat is not None and lon is not None:
         out["gps"] = {"lat": round(float(lat), 7), "lon": round(float(lon), 7)}

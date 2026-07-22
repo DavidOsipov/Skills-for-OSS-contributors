@@ -25,11 +25,11 @@ Run every command in one runtime: `py` on Windows or `python3` on macOS/Linux. B
 python3 scripts/inspect_image.py --check
 ```
 
-It requires PyYAML, Pillow, ExifTool 12.46+, ImageMagick, and MediaInfo. If anything is missing or outdated, stop; propose the smallest platform-appropriate installation command and wait for user approval. Do not continue with a partial workflow.
+It requires PyYAML, Pillow, and ExifTool 12.46+. ImageMagick and MediaInfo are optional cross-checkers; their absence does not block an ExifTool-centered workflow. If a required dependency is missing or outdated, stop; propose the smallest platform-appropriate installation command and wait for user approval. Do not continue with a partial workflow.
 
-- Windows: `winget install OliverBetz.ExifTool ImageMagick.ImageMagick MediaArea.MediaInfo`, then `py -m pip install pillow pyyaml`
-- macOS: `brew install exiftool imagemagick mediainfo`, then `python3 -m pip install pillow pyyaml`
-- Debian/Ubuntu: `sudo apt-get install libimage-exiftool-perl imagemagick mediainfo python3-pil python3-yaml`
+- Windows: `winget install OliverBetz.ExifTool`, then `py -m pip install pillow pyyaml`
+- macOS: `brew install exiftool`, then `python3 -m pip install pillow pyyaml`
+- Debian/Ubuntu: `sudo apt-get install libimage-exiftool-perl python3-pil python3-yaml`
 
 Set `ET_EXIFTOOL` to the executable path when ExifTool is not on `PATH`. Windows-installed tools do not satisfy a WSL preflight and vice versa.
 
@@ -42,7 +42,7 @@ Set `ET_EXIFTOOL` to the executable path when ExifTool is not on `PATH`. Windows
    python3 scripts/inspect_image.py --image photo.jpg --out technical-report.json
    ```
 
-   A dependency failure, decode error, or unexplained mismatch is a stop condition.
+   A required-dependency failure, decode error, or unexplained mismatch is a stop condition. ExifTool is the implementation authority for reading, writing, native storage, and format capability; the other readers are cross-checks only.
 3. Optionally harvest technical candidates. Do not use `--merge` until each field is reviewed or user-confirmed:
 
    ```bash
@@ -81,16 +81,26 @@ Set `ET_EXIFTOOL` to the executable path when ExifTool is not on `PATH`. Windows
 
 7. Compare the embedded XMP with the approved spec. Verify creator, rights, location, accessibility text, codes, and AI disclosure; then keep or remove only the temporary sidecar as appropriate.
 
+8. Validate the final file through ExifTool before delivery:
+
+   ```bash
+   python3 scripts/validate_metadata.py --image photo.jpg --require-xmp
+   ```
+
+   Treat any validation warning as a review stop. Use `reference/standards.md` for
+   semantic questions and `reference/exiftool-reference.md` for implementation syntax.
+
 ## References
 
 - `reference/field_guide.md`: per-image spec fields and mappings.
 - `reference/author_profile.template.yaml`: private profile template; copy it before editing.
 - `reference/example_spec.json` and `reference/example_spec_ai.json`: generic starting specs.
 - `reference/iptc-reference-index.md`: bundled IPTC standard, machine-readable TechReference, mappings, and vocabularies.
-- `reference/exiftool-docs/`: format-specific ExifTool references.
+- `reference/standards.md` and `reference/standards-index.yaml`: standards routing and restricted-reference policy.
+- `reference/exiftool-reference.md` and `reference/exiftool-docs/`: ExifTool implementation guidance and source docs.
 - `scripts/geocode.py --help`: reverse-geocoding pipeline; network-off by default, cache and identifiable user agent required for public Nominatim.
 
-Refresh IPTC documents and controlled vocabularies with `python3 scripts/update_iptc_references.py`, then review `reference/iptc/source-manifest.json`.
+Refresh IPTC documents and controlled vocabularies with `python3 scripts/update_iptc_references.py`, then review `reference/iptc/source-manifest.json`. Do not add ISO or CIPA PDFs to the portable package unless redistribution has been reviewed.
 
 ## Script quality & security
 

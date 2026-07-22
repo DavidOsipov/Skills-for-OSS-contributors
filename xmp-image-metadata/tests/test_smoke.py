@@ -22,6 +22,7 @@ sys.path.insert(0, str(SCRIPTS))
 
 import _common  # noqa: E402
 import build_xmp  # noqa: E402
+import validate_metadata  # noqa: E402
 
 FIXTURES = Path(__file__).resolve().parent
 
@@ -85,6 +86,19 @@ def test_metadata_date_is_timezone_aware():
     assert stamp[-6] in "+-" and stamp[-3] == ":"  # ends with +HH:MM
 
 
+def test_builder_does_not_invent_native_exif_version_for_sidecar():
+    xmp = build_xmp.build(_spec(), _profile())
+    assert "<exif:ExifVersion>" not in xmp
+
+
+def test_empty_plus_structures_are_omitted():
+    profile = _profile()
+    profile["plus"] = {"supplier_name": "", "supplier_id": ""}
+    xmp = build_xmp.build(_spec(), profile)
+    assert "<plus:CopyrightOwner>" not in xmp
+    assert "<plus:Licensor>" not in xmp
+
+
 # ---- integration: embed + read across formats -------------------------------
 EXIFTOOL = _common.find_exiftool()
 HAVE_PIL = shutil.which("python3") is not None
@@ -113,10 +127,24 @@ def test_embed_and_readback(tmp_path: Path, ext: str, fmt: str):
     )
     assert r.returncode == 0, r.stderr
     got = subprocess.run(
-        [*EXIFTOOL, "-s", "-T", "-XMP-dc:Creator", "-EXIF:Artist", str(img)],
+        [
+            *EXIFTOOL,
+            "-s",
+            "-T",
+            "-XMP-dc:Creator",
+            "-EXIF:Artist",
+            "-EXIF:ExifVersion",
+            "-EXIF:ExifImageWidth",
+            "-EXIF:ExifImageHeight",
+            str(img),
+        ],
         capture_output=True, text=True,
     ).stdout
     assert "Test Creator" in got  # XMP creator + synced EXIF Artist both present
+    assert "0300" in got
+    assert "32" in got and "24" in got
+    report = validate_metadata.validate(EXIFTOOL, str(img))
+    assert report["valid"], report
 
 
 def test_argument_injection_dash_filename(tmp_path: Path):

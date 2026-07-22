@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import subprocess
 import sys
 
@@ -32,6 +33,9 @@ SYNC_MAP = [
     "-EXIF:GPSLatitude<XMP-exif:GPSLatitude",
     "-EXIF:GPSLongitude<XMP-exif:GPSLongitude",
     "-EXIF:GPSAltitude<XMP-exif:GPSAltitude",
+    # ExifTool exposes XMP's exif:PixelX/YDimension as ExifImageWidth/Height.
+    "-EXIF:ExifImageWidth<XMP-exif:ExifImageWidth",
+    "-EXIF:ExifImageHeight<XMP-exif:ExifImageHeight",
     "-IPTC:By-line<XMP-dc:Creator",
     "-IPTC:CopyrightNotice<XMP-dc:Rights",
     "-IPTC:Caption-Abstract<XMP-dc:Description",
@@ -95,8 +99,22 @@ def read_xmp(cmd: list[str], image: str) -> str:
     return proc.stdout
 
 
+def read_tag(cmd: list[str], tag: str, image: str) -> str:
+    """Read one native tag without print conversion; return empty when absent."""
+    proc = subprocess.run(
+        [*cmd, "-s3", f"-{tag}", _common.safe_arg(image)],
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=60,
+    )
+    return proc.stdout.strip()
+
+
 def sync_exif(cmd: list[str], image: str) -> int:
     safe = _common.safe_arg(image)
+    existing_version = read_tag(cmd, "EXIF:ExifVersion", image)
+    exif_version = existing_version if re.fullmatch(r"\d{4}", existing_version) else "0300"
     args = [
         *cmd,
         "-m",
@@ -107,6 +125,7 @@ def sync_exif(cmd: list[str], image: str) -> int:
         "-tagsfromfile",
         safe,
         *SYNC_MAP,
+        f"-EXIF:ExifVersion={exif_version}",
         safe,
     ]
     proc = subprocess.run(args, capture_output=True, text=True, timeout=300)

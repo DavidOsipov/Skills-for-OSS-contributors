@@ -20,6 +20,7 @@ import datetime
 import json
 import os
 import re
+import subprocess
 import sys
 import uuid
 from collections.abc import Iterable, Mapping
@@ -223,6 +224,25 @@ def detect_image(image: str) -> tuple[int | None, int | None, str | None]:
         return None, None, None
 
 
+def native_exif_version(image: str) -> str | None:
+    """Read a valid native Exif version without inventing one for a sidecar."""
+    cmd = _common.find_exiftool()
+    if not cmd:
+        return None
+    try:
+        proc = subprocess.run(
+            [*cmd, "-s3", "-EXIF:ExifVersion", _common.safe_arg(image)],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=60,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    value = proc.stdout.strip()
+    return value if re.fullmatch(r"\d{4}", value) else None
+
+
 def _gps(dec: float, is_lat: bool) -> str:
     ref = ("N" if dec >= 0 else "S") if is_lat else ("E" if dec >= 0 else "W")
     dec = abs(float(dec))
@@ -246,7 +266,10 @@ def alt_block(tag: str, value: object, IND: str) -> str:
 
 
 def bag_block(tag: str, items: Iterable[object], IND: str) -> str:
-    lis = "".join(f"{IND}      <rdf:li>{esc(i)}</rdf:li>\n" for i in items)
+    values = list(items)
+    if not values:
+        return ""
+    lis = "".join(f"{IND}      <rdf:li>{esc(i)}</rdf:li>\n" for i in values)
     return f"{IND}<{tag}>\n{IND}   <rdf:Bag>\n{lis}{IND}   </rdf:Bag>\n{IND}</{tag}>\n"
 
 
@@ -300,6 +323,7 @@ def build(spec: Spec, profile: Mapping[str, Any], image: str | None = None) -> s
         h = h or dh
         mime = mime or dmime
     mime = mime or "image/jpeg"
+    native_version = native_exif_version(image) if image else None
 
     kw = list(spec.get("keywords", [])) + list(profile.get("identity_keywords", []))
     seen, kw_u = set(), []
@@ -409,24 +433,18 @@ def build(spec: Spec, profile: Mapping[str, Any], image: str | None = None) -> s
         A(
             f'{IND}<Iptc4xmpCore:IntellectualGenre>{esc(spec["intellectual_genre"])}</Iptc4xmpCore:IntellectualGenre>\n'
         )
-    A(f'{IND}<Iptc4xmpCore:CreatorContactInfo rdf:parseType="Resource">\n')
-    if ct.get("country"):
-        A(
-            f'{IND}   <Iptc4xmpCore:CiAdrCtry>{esc(ct["country"])}</Iptc4xmpCore:CiAdrCtry>\n'
-        )
-    if ct.get("city"):
-        A(
-            f'{IND}   <Iptc4xmpCore:CiAdrCity>{esc(ct["city"])}</Iptc4xmpCore:CiAdrCity>\n'
-        )
-    if ct.get("email"):
-        A(
-            f'{IND}   <Iptc4xmpCore:CiEmailWork>{esc(ct["email"])}</Iptc4xmpCore:CiEmailWork>\n'
-        )
-    if ct.get("url"):
-        A(
-            f'{IND}   <Iptc4xmpCore:CiUrlWork>{esc(ct["url"])}</Iptc4xmpCore:CiUrlWork>\n'
-        )
-    A(f"{IND}</Iptc4xmpCore:CreatorContactInfo>\n")
+    contact_fields = [
+        ("CiAdrCtry", ct.get("country")),
+        ("CiAdrCity", ct.get("city")),
+        ("CiEmailWork", ct.get("email")),
+        ("CiUrlWork", ct.get("url")),
+    ]
+    if any(value for _, value in contact_fields):
+        A(f'{IND}<Iptc4xmpCore:CreatorContactInfo rdf:parseType="Resource">\n')
+        for tag, value in contact_fields:
+            if value:
+                A(f"{IND}   <Iptc4xmpCore:{tag}>{esc(value)}</Iptc4xmpCore:{tag}>\n")
+        A(f"{IND}</Iptc4xmpCore:CreatorContactInfo>\n")
     if spec.get("alt_text"):
         A(alt_block("Iptc4xmpCore:AltTextAccessibility", spec["alt_text"], IND))
     if spec.get("ext_description"):
@@ -578,18 +596,21 @@ def build(spec: Spec, profile: Mapping[str, Any], image: str | None = None) -> s
     # --- PLUS ---
     def plus_seq(tag: str, fields: Iterable[tuple[str, Any]]) -> str:
         inner = "".join(f"{IND}         <{k}>{esc(v)}</{k}>\n" for k, v in fields if v)
+        if not inner:
+            return ""
         return f'{IND}<{tag}>\n{IND}   <rdf:Seq>\n{IND}      <rdf:li rdf:parseType="Resource">\n{inner}{IND}      </rdf:li>\n{IND}   </rdf:Seq>\n{IND}</{tag}>\n'
 
     if persons:
+        for tag, key in (
+            ("ModelReleaseStatus", "model_release_status"),
+            ("MinorModelAgeDisclosure", "minor_model_age_disclosure"),
+        ):
+            if plus.get(key):
+                A(f"{IND}<plus:{tag}>{esc(plus[key])}</plus:{tag}>\n")
+    if plus.get("property_release_status"):
         A(
-            f'{IND}<plus:ModelReleaseStatus>{esc(plus.get("model_release_status",""))}</plus:ModelReleaseStatus>\n'
+            f'{IND}<plus:PropertyReleaseStatus>{esc(plus["property_release_status"])}</plus:PropertyReleaseStatus>\n'
         )
-        A(
-            f'{IND}<plus:MinorModelAgeDisclosure>{esc(plus.get("minor_model_age_disclosure",""))}</plus:MinorModelAgeDisclosure>\n'
-        )
-    A(
-        f'{IND}<plus:PropertyReleaseStatus>{esc(plus.get("property_release_status",""))}</plus:PropertyReleaseStatus>\n'
-    )
     A(
         plus_seq(
             "plus:ImageSupplier",
@@ -642,7 +663,8 @@ def build(spec: Spec, profile: Mapping[str, Any], image: str | None = None) -> s
     A(f"{IND}<xmp:ModifyDate>{meta_ts}</xmp:ModifyDate>\n")
 
     # --- exif / tiff (+ GPS) ---
-    A(f"{IND}<exif:ExifVersion>0231</exif:ExifVersion>\n")
+    if native_version:
+        A(f"{IND}<exif:ExifVersion>{esc(native_version)}</exif:ExifVersion>\n")
     if date_created:
         A(
             f"{IND}<exif:DateTimeOriginal>{esc(date_created)}T00:00:00{tz}</exif:DateTimeOriginal>\n"

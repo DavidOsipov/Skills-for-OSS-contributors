@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -64,6 +65,10 @@ def fetch(url: str) -> bytes:
         request, timeout=60
     ) as response:  # noqa: S310 (host allow-listed above)
         return bytes(response.read())
+
+
+def digest(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
 
 
 def concepts(payload: dict[str, Any]) -> Any:
@@ -161,7 +166,11 @@ def main() -> int:
         for filename, url in DOCUMENTS.items():
             data = fetch(url)
             (IPTC_REF / filename).write_bytes(data)
-            manifest["documents"][filename] = {"source_url": url, "bytes": len(data)}
+            manifest["documents"][filename] = {
+                "source_url": url,
+                "bytes": len(data),
+                "sha256": digest(data),
+            }
             print(f"updated {filename}")
     if not a.docs_only:
         for name, (url, destination) in VOCABS.items():
@@ -172,6 +181,8 @@ def main() -> int:
                 "release_timestamp": release,
                 "entries": count,
                 "file": str(destination.relative_to(ROOT)),
+                "bytes": destination.stat().st_size,
+                "sha256": digest(destination.read_bytes()),
             }
             print(f"updated {destination.name} ({count} entries)")
     (IPTC_REF / "source-manifest.json").write_text(
