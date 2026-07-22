@@ -8,7 +8,7 @@ The repository currently contains one skill for standards-compatible image metad
 
 | Skill                                                | Purpose                                                                                                                                                                       |
 | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Portable XMP Image Metadata](./xmp-image-metadata/) | Inspect images, prepare verified metadata, reverse-geocode coordinates with privacy controls, and embed standards-compatible XMP, IPTC, EXIF, Dublin Core, and PLUS metadata. |
+| [XMP Image Metadata](./xmp-image-metadata/) | Inspect images, prepare verified metadata, reverse-geocode coordinates with privacy controls, and embed standards-compatible XMP, IPTC, EXIF, Dublin Core, and PLUS metadata. |
 
 ### Portable XMP Image Metadata
 
@@ -46,13 +46,13 @@ Not every future skill will necessarily require every optional directory.
 The current skill is identified as:
 
 ```text
-$xmp-image-metadata-portable
+$xmp-image-metadata
 ```
 
 A compatible agent can be prompted to use it for tasks such as:
 
 ```text
-Use $xmp-image-metadata-portable to inspect this image and prepare
+Use $xmp-image-metadata to inspect this image and prepare
 standards-compatible metadata without modifying the original.
 ```
 
