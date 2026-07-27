@@ -1,18 +1,20 @@
 # Portable XMP Image Metadata
 
-A portable agent skill and Python toolkit for inspecting images, preparing verified metadata, reverse-geocoding GPS coordinates with privacy controls, and embedding standards-compatible XMP, EXIF, IPTC-IIM, Dublin Core, PLUS, and related metadata.
+A portable AI-agent skill for handling image metadata end to end: inspecting the image, understanding what is visibly shown, writing useful alt text and descriptions, preparing verified metadata, reverse-geocoding approved GPS coordinates, embedding standards-compatible XMP/EXIF/IPTC metadata, and validating the final file.
 
 - **Declared skill name:** `$xmp-image-metadata-portable`
 - **Repository directory:** `xmp-image-metadata`
 - **Source repository:** [DavidOsipov/Skills-for-OSS-contributors](https://github.com/DavidOsipov/Skills-for-OSS-contributors)
 - **License:** MIT
 
+The intended way to use this skill is to give the image to a capable AI agent and ask it to complete the whole workflow. Manual operation is possible, but is mainly documented for transparency, debugging, and advanced use.
+
 > [!IMPORTANT]
-> Image metadata is editable and must be treated as an untrusted claim. This skill does not infer a creator, rights holder, license, identity, location, capture date, or AI provenance from pixels or inherited metadata. Review and confirm every sensitive or factual field before embedding it.
+> The AI should inspect the actual image pixels and write alt text, captions, descriptions, and keywords from what is visibly present. Personal identity, exact location, ownership, rights, license, capture date, and AI provenance must come from user-provided or user-confirmed information rather than guesses.
 
-## What it does
+## What the AI agent does
 
-The skill provides a guarded, repeatable workflow for:
+A capable AI agent can run the entire workflow on the user's behalf. It should:
 
 - hashing and fully decoding an image before modification;
 - cross-checking dimensions and technical properties with ExifTool, Pillow, ImageMagick, and MediaInfo;
@@ -28,6 +30,61 @@ The skill provides a guarded, repeatable workflow for:
 - testing the workflow across JPEG, PNG, WebP, and AVIF.
 
 The toolkit is designed for JPEG, PNG, WebP, AVIF, HEIC/HEIF, TIFF, and other formats writable by the installed ExifTool version.
+
+## Recommended usage: let AI handle everything
+
+You normally should not need to run the individual scripts yourself.
+
+Give the image to an AI agent that can view images, access this skill, and execute its tools. Ask it to:
+
+1. inspect the image pixels and technical structure;
+2. understand what is visibly shown;
+3. write accurate alt text, a human-readable caption, a longer description, and useful keywords;
+4. read existing EXIF/IPTC/XMP only as untrusted candidate data;
+5. ask for or use confirmed creator, rights, license, identity, location, and provenance information;
+6. create or update the private author profile and per-image specification;
+7. select appropriate IPTC Media Topics and Digital Source Type values;
+8. reverse-geocode GPS coordinates only when permitted;
+9. build and embed the metadata while preserving the original;
+10. read the metadata back and validate the final image.
+
+A good default prompt is:
+
+```text
+Use $xmp-image-metadata-portable to process this image end to end.
+
+Inspect the actual image and technical metadata. Write accurate alt text,
+a concise title, a useful caption, a detailed description, and relevant
+keywords based on what is visibly shown.
+
+Use my confirmed personal, creator, rights, license, location, and provenance
+information where applicable. Do not guess sensitive facts. Try offline
+geocoding first. Before any online geocoding, ask for permission to transmit
+the exact coordinates; if the chosen provider requires an API key, tell me
+which local environment variable to configure without asking me to paste the
+secret into metadata or the repository.
+
+Create or update the private profile and per-image metadata specification,
+choose appropriate IPTC classifications, embed the metadata while preserving
+the original, then read it back and validate the final image.
+```
+
+For a batch of images:
+
+```text
+Use $xmp-image-metadata-portable to process all attached images end to end.
+
+Inspect every image individually and create image-specific titles, alt text,
+captions, detailed descriptions, and keywords. Reuse my confirmed author and
+rights information, but do not copy scene descriptions, locations, people,
+or classifications between images unless they are actually applicable.
+
+Preserve every original, embed the approved metadata, and validate each final
+file. Return a concise report of completed files, warnings, and anything that
+still needs my confirmation.
+```
+
+The AI should do the repetitive technical work itself. The user should mainly review sensitive facts, resolve uncertainty, and approve the final metadata.
 
 ## Safety and privacy model
 
@@ -150,7 +207,10 @@ python3 scripts/inspect_image.py --check
 
 The command exits nonzero when ExifTool, Pillow, or PyYAML is missing or when ExifTool is too old.
 
-## Quick start
+## Manual workflow reference
+
+The following commands are primarily for debugging, auditing, development, or users who prefer direct CLI control. For normal use, ask an AI agent to execute these steps.
+
 
 ### 1. Create a private profile
 
@@ -302,6 +362,27 @@ The result is candidate JSON only. It never modifies the image or specification.
 ### Reverse-geocode with an approved online provider
 
 Use online geocoding only after the user explicitly approves transmitting the exact coordinates.
+
+When an AI agent is running the workflow, it must:
+
+1. try the offline ExifTool GeoLocation lookup first;
+2. explain that an online provider will receive the image's exact GPS coordinates;
+3. ask the user for explicit permission before using `--allow-network`;
+4. offer Nominatim when no API key is needed;
+5. when `geocode.maps.co` is selected, ask the user to configure an API key in the local `GEOCODE_MAPS_CO_API_KEY` environment variable;
+6. never ask the user to place the key in a metadata file, profile, prompt, command argument, or repository;
+7. stop rather than silently switching to an online provider when consent or required credentials are missing.
+
+A suitable agent message is:
+
+```text
+The offline location lookup was unavailable or insufficient. May I send the
+exact GPS coordinates to an online reverse-geocoding service?
+
+Nominatim does not require an API key. geocode.maps.co requires you to set
+GEOCODE_MAPS_CO_API_KEY in the local environment. Do not paste the key into
+the image metadata, author profile, command line, prompt, or repository.
+```
 
 Nominatim example:
 
@@ -609,24 +690,17 @@ Do not add restricted ISO, CIPA, or other standards documents to the public pack
 
 A compatible folder-based agent host can discover the skill from `SKILL.md` and `agents/openai.yaml`.
 
-Example invocations:
+The simplest instruction is:
 
 ```text
-Use $xmp-image-metadata-portable to inspect this image and prepare
-standards-compatible metadata without modifying the original.
+Use $xmp-image-metadata-portable to process this image end to end.
+Inspect the image, create proper alt text and descriptions, prepare all
+appropriate metadata, preserve the original, embed the metadata, and
+validate the final file. Ask me only for sensitive or uncertain facts
+that cannot be established from the image itself.
 ```
 
-```text
-Use $xmp-image-metadata-portable to update my private author profile
-with the personal and rights information I provide, then show me the
-proposed changes before using them.
-```
-
-```text
-Use $xmp-image-metadata-portable to improve the title, caption, alt text,
-keywords, location fields, credits, and licensing metadata for this image.
-Do not guess personal, location, rights, or provenance information.
-```
+The AI agent should perform the technical workflow rather than merely explain the commands. It should inspect the image visually, create image-specific text, operate the scripts, review the results, and deliver the completed file plus any warnings or unresolved questions.
 
 Preserve the complete directory structure when copying the skill into another environment. Host-specific installation and discovery paths vary; `SKILL.md` is the authoritative operational instruction file.
 
