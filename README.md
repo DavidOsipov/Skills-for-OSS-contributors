@@ -8,7 +8,7 @@ The repository currently contains one skill for standards-compatible image metad
 
 | Skill                                                | Purpose                                                                                                                                                                       |
 | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [XMP Image Metadata](./skills/xmp-image-metadata/) | Inspect images, prepare verified metadata, reverse-geocode coordinates with privacy controls, and embed standards-compatible XMP, IPTC, EXIF, Dublin Core, and PLUS metadata. |
+| [XMP Image Metadata](/skills/xmp-image-metadata/) | Inspect images, prepare verified metadata, reverse-geocode coordinates with privacy controls, and embed standards-compatible XMP, IPTC, EXIF, Dublin Core, and PLUS metadata. |
 
 ### Portable XMP Image Metadata
 
