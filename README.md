@@ -8,11 +8,11 @@ The repository currently contains one skill for standards-compatible image metad
 
 | Skill                                                | Purpose                                                                                                                                                                       |
 | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [XMP Image Metadata](./xmp-image-metadata/) | Inspect images, prepare verified metadata, reverse-geocode coordinates with privacy controls, and embed standards-compatible XMP, IPTC, EXIF, Dublin Core, and PLUS metadata. |
+| [XMP Image Metadata](./skills/xmp-image-metadata/) | Inspect images, prepare verified metadata, reverse-geocode coordinates with privacy controls, and embed standards-compatible XMP, IPTC, EXIF, Dublin Core, and PLUS metadata. |
 
 ### Portable XMP Image Metadata
 
-The [`xmp-image-metadata`](./xmp-image-metadata/) skill is designed for careful metadata work across JPEG, PNG, WebP, AVIF, HEIC, TIFF, and other ExifTool-writable formats.
+The [`xmp-image-metadata`](./skills/xmp-image-metadata/) skill is designed for careful metadata work across JPEG, PNG, WebP, AVIF, HEIC, TIFF, and other ExifTool-writable formats.
 
 It provides:
 
@@ -26,7 +26,7 @@ It provides:
 
 The skill deliberately does **not** bundle a creator identity or reusable personal profile. Author, rights, contact, location, and provenance data must come from an authorized private profile and image-specific evidence.
 
-See [`xmp-image-metadata/SKILL.md`](./xmp-image-metadata/SKILL.md) for the complete workflow, safety rules, dependencies, and commands.
+See [`xmp-image-metadata/SKILL.md`](./skills/xmp-image-metadata/SKILL.md) for the complete workflow, safety rules, dependencies, and commands.
 
 ## Using a skill
 
