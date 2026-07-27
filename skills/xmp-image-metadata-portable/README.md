@@ -3,7 +3,7 @@
 A portable AI-agent skill for handling image metadata end to end: inspecting the image, understanding what is visibly shown, writing useful alt text and descriptions, preparing verified metadata, reverse-geocoding approved GPS coordinates, embedding standards-compatible XMP/EXIF/IPTC metadata, and validating the final file.
 
 - **Declared skill name:** `$xmp-image-metadata-portable`
-- **Repository directory:** `xmp-image-metadata`
+- **Repository directory:** `skills/xmp-image-metadata-portable`
 - **Source repository:** [DavidOsipov/Skills-for-OSS-contributors](https://github.com/DavidOsipov/Skills-for-OSS-contributors)
 - **License:** MIT
 
