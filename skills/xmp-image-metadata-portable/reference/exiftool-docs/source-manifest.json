@@ -1,0 +1,22 @@
+{
+  "retrieved_at": "2026-07-22",
+  "source_url": "https://exiftool.org/",
+  "documents": {
+    "ExifTool.pdf": {
+      "bytes": 158228,
+      "sha256": "f2e24448a6d6064809670a274328c092263cf1259823eb46ba91adbae6fb185c"
+    },
+    "ExifTool.md": {
+      "bytes": 121542,
+      "sha256": "2933f1e329dae67a1dfa4e6a5d7ebaac22be19a4dcf0313bf16283d6e1b0ab22"
+    },
+    "exiftool_pod.pdf": {
+      "bytes": 189292,
+      "sha256": "133aa3d8366852db7c5ec0166bfcbbdfe1fb49eab7176caaf79b5c9354a54bd4"
+    },
+    "exiftool_pod.md": {
+      "bytes": 148432,
+      "sha256": "dd68e82208975d8155729aaa3edf781b1bd2b6bafaa711659c6fb5cb71c90bd0"
+    }
+  }
+}

@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.15">
+<meta name="keywords" content="iptc, exif, schema.org, photo, metadata">
+<meta name="author" content="IPTC Photo Metadata Working Group">
+<title>IPTC Photo Metadata Technical Reference Documentation</title>
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#3f7fca;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol,ul.no-bullet,ol.no-bullet{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.no-bullet{list-style:none}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menu{color:rgba(0,0,0,.8)}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-weight: bold; font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#3f7fca;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all th.tableblock,table.grid-all td.tableblock{border-width:0 1px 1px 0}
+table.grid-all tfoot>tr>th.tableblock,table.grid-all tfoot>tr>td.tableblock{border-width:1px 1px 0 0}
+table.grid-cols th.tableblock,table.grid-cols td.tableblock{border-width:0 1px 0 0}
+table.grid-all *>tr>.tableblock:last-child,table.grid-cols *>tr>.tableblock:last-child{border-right-width:0}
+table.grid-rows th.tableblock,table.grid-rows td.tableblock{border-width:0 0 1px 0}
+table.grid-all tbody>tr:last-child>th.tableblock,table.grid-all tbody>tr:last-child>td.tableblock,table.grid-all thead:last-child>tr>th.tableblock,table.grid-rows tbody>tr:last-child>th.tableblock,table.grid-rows tbody>tr:last-child>td.tableblock,table.grid-rows thead:last-child>tr>th.tableblock{border-bottom-width:0}
+table.grid-rows tfoot>tr>th.tableblock,table.grid-rows tfoot>tr>td.tableblock{border-width:1px 0 0 0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.unstyled,ol.unnumbered,ul.checklist,ul.none{list-style-type:none}
+ul.unstyled,ol.unnumbered,ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1em;font-size:.85em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{width:1em;position:relative;top:1px}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:0 .75em;line-height:1}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0{page-break-before:always}
+/*,body.book .sect1>h2*/
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+/* IPTC Settings */
+body.article.toc2 #header #toc.toc2 ul.sectlevel1 li {font-weight: bold;}
+body.article.toc2 #header #toc.toc2 ul.sectlevel2 li {font-weight: normal;}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1><span class="image"><a class="image" href="https://iptc.org/standards/photo-metadata/"><img src="./images/iptc_sv_gradient_70x70.jpg" alt="iptc sv gradient 70x70"></a></span> IPTC Photo Metadata Technical Reference Documentation</h1>
+<div class="details">
+<span id="author" class="author">IPTC Photo Metadata Working Group</span><br>
+<span id="email" class="email"><a href="mailto:office@iptc.org">office@iptc.org</a></span><br>
+<span id="revnumber">version 1.2,</span>
+<span id="revdate">2021-10-24</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel0">
+<li><a href="#about-the-documentation">About the Documentation</a>
+<ul class="sectlevel1">
+<li><a href="#copyright">Copyright</a></li>
+<li><a href="#acknowledgments">Acknowledgments</a></li>
+<li><a href="#iptc-photo-metadata-technical-reference-documentation-history">IPTC Photo Metadata Technical Reference Documentation History</a></li>
+</ul>
+</li>
+<li><a href="#about-the-iptc-photo-metadata-technical-reference">About the IPTC Photo Metadata Technical Reference</a>
+<ul class="sectlevel1">
+<li><a href="#the-iptc-pmd-techreference-files">The iptc-pmd-techreference files</a></li>
+</ul>
+</li>
+<li><a href="#iptc-photo-metadata-technical-reference-data">IPTC Photo Metadata Technical Reference data</a>
+<ul class="sectlevel1">
+<li><a href="#terminology-used-in-this-document">Terminology Used In This Document</a></li>
+<li><a href="#top-level-properties">Top Level Properties</a></li>
+<li><a href="#techreference-top-level-property-data">TechReference top level property data</a>
+<ul class="sectlevel2">
+<li><a href="#ipmd_top-data"><strong>ipmd_top</strong> data</a></li>
+<li><a href="#ipmd_struct-data"><strong>ipmd_struct</strong> data</a></li>
+<li><a href="#ipmd_-data-example">ipmd_* data example</a></li>
+<li><a href="#et_-data"><strong>et_* </strong> data</a></li>
+<li><a href="#et_-data-example">et_* data example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#references">References</a>
+<ul class="sectlevel1">
+<li><a href="#related-standards">Related standards</a></li>
+<li><a href="#related-tools">Related tools</a></li>
+</ul>
+</li>
+<li><a href="#fixed-errata">Fixed Errata</a>
+<ul class="sectlevel1">
+<li><a href="#list-of-fixed-errata">List of fixed errata</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<h1 id="about-the-documentation" class="sect0"><a class="anchor" href="#about-the-documentation"></a>About the Documentation</h1>
+<div class="sect1">
+<h2 id="copyright"><a class="anchor" href="#copyright"></a>Copyright</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Copyright © 2021 by IPTC, the International Press Telecommunications Council - <a href="https://iptc.org" class="bare">https://iptc.org</a>. Rights Reserved.</p>
+</div>
+<div class="paragraph">
+<p>The IPTC Photo Metadata Technical Reference Documentation is published under the Creative Commons Attribution 4.0 license - see the full license agreement at <a href="http://creativecommons.org/licenses/by/4.0/" class="bare">http://creativecommons.org/licenses/by/4.0/</a>.
+By obtaining, using and/or copying this document, you (the licensee) agree that you have read, understood,
+and will comply with the terms and conditions of the license.</p>
+</div>
+<div class="paragraph">
+<p>This project intends to use materials that are either in the public domain or are available by the permission for their respective copyright holders. All materials of this IPTC standard covered by copyright shall be licensable at no charge.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="acknowledgments"><a class="anchor" href="#acknowledgments"></a>Acknowledgments</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document is the result of a team effort by members of Photo Metadata Working Group. The development of the TechReference is lead by Michael Steidl and these persons contributed (ordered by surname):</p>
+</div>
+<div class="paragraph">
+<p>Brendan Quinn (IPTC), David Riecks (PLUS)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="iptc-photo-metadata-technical-reference-documentation-history"><a class="anchor" href="#iptc-photo-metadata-technical-reference-documentation-history"></a>IPTC Photo Metadata Technical Reference Documentation History</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The rows below keep track of versions of this documentation and not of releases of the IPTC Photo Metadata Technical Reference data file(s).</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Version</th>
+<th class="tableblock halign-left valign-top">Release Date</th>
+<th class="tableblock halign-left valign-top">Release Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2021-07-15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial public release</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2021-10-24</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IPTC Photo Metadata Standard 2021.1 incorporated</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h1 id="about-the-iptc-photo-metadata-technical-reference" class="sect0"><a class="anchor" href="#about-the-iptc-photo-metadata-technical-reference"></a>About the IPTC Photo Metadata Technical Reference</h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="paragraph">
+<p>The IPTC Photo Metadata Technical Reference (TechReference) provides data reflecting the specifications of the <a href="https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata">IPTC Photo Metadata Standard</a> in a machine-readable way and it is publicly available from IPTC in JSON or YAML format.</p>
+</div>
+<div class="paragraph">
+<p>While the specification document of the IPTC Photo Metadata Standard defines each property with details in a format for human readers the TechReference data provides these specifications in a format which can be read by software. The TechReference data can be used by anybody for software dealing with IPTC Photo Metadata to have a stable and reliable reference of all the photo metadata properties defined by the standard. Which details about a property are provided is documented in the <a href="#iptc-photo-metadata-technical-reference-data">IPTC Photo Metadata Technical Reference data</a> section.</p>
+</div>
+<div class="paragraph">
+<p>This documentation of the TechReference data helps to interpret and use the data correctly.</p>
+</div>
+<div class="paragraph">
+<p><strong>Key features of the IPTC Photo Metadata Technical Reference data</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Provides the specifications of all metadata properties defined by the IPTC Photo Metadata Standard in a machine-readable format.</p>
+</li>
+<li>
+<p>Available formats: JSON  and YAML.</p>
+</li>
+<li>
+<p>The TechReference is publicly available and can be used for free &#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203; if the applied <a href="http://creativecommons.org/licenses/by/4.0/" class="bare">http://creativecommons.org/licenses/by/4.0/</a> is accepted.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>A mild limitation</strong></p>
+</div>
+<div class="paragraph">
+<p>The TechReference data provides some details in a generic way covering the slightly different specification details of data types of the <a href="#ISO-XMP">XMP</a> and the <a href="#IPTC-IIM">IPTC IIM</a> format. E.g. the TechReference data name a data type "string" while XMP names it "Text" and IIM names it "sequence of octets". Therefore the proper implementation of reading and writing XMP or IIM data in a software requires to follow the format-specific specifications, they can be found in the IPTC Photo Metadata Standard document in the XMP Spec and IIM Spec rows of the specification table for each metadata property. Technical details of the XMP and IIM standards can be found in their specification documents.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-iptc-pmd-techreference-files"><a class="anchor" href="#the-iptc-pmd-techreference-files"></a>The iptc-pmd-techreference files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>IPTC provides the TechReference data in files of two formats.</p>
+</div>
+<div class="paragraph">
+<p>The basic file name is <strong>iptc-pmd-techreference</strong><br>
+The version of the IPTC Photo Metadata Standard covered by the data of a file is appended to it. For the current version of the standard 2021.1 the basic file name is iptc-pmd-techreference<strong>_2021.1</strong></p>
+</div>
+<div class="paragraph">
+<p>To cover additional details or to correct errors updated releases of a file may be published. The file name does not change in this case, but each file has a <em>document_timestamp</em> property at its top and the timestamp reflects the date and time of the release - updated releases have a newer timestamp than previous ones.</p>
+</div>
+<div class="paragraph">
+<p><strong>Serialization formats: JSON and YAML</strong></p>
+</div>
+<div class="paragraph">
+<p>To support different software environments the data of the TechReference are serialized in two formats:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>in <strong>JSON</strong>. Full file name of this variant: e.g. iptc-pmd-techreference_2021.1.<strong>json</strong></p>
+</li>
+<li>
+<p>in <strong>YAML</strong>. Full filename of this variant: e.g. iptc-pmd-techreference_2021.1.<strong>yml</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These files can be <strong>downloaded</strong> from this folder of the standards branch of the IPTC website: <a href="https://iptc.org/std/photometadata/specification" class="bare">https://iptc.org/std/photometadata/specification</a> as</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Standard version 2021.1</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2021.1.json" class="bare">https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2021.1.json</a></p>
+</li>
+<li>
+<p><a href="https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2021.1.yml" class="bare">https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2021.1.yml</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Standard version 2019.1</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2019.1.json" class="bare">https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2019.1.json</a></p>
+</li>
+<li>
+<p><a href="https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2019.1.yml" class="bare">https://iptc.org/std/photometadata/specification/iptc-pmd-techreference_2019.1.yml</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h1 id="iptc-photo-metadata-technical-reference-data" class="sect0"><a class="anchor" href="#iptc-photo-metadata-technical-reference-data"></a>IPTC Photo Metadata Technical Reference data</h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="paragraph">
+<p>The IPTC Photo Metadata Technical Reference - short name: <em>TechReference</em> - provides data reflecting the specifications of the <a href="https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata">IPTC Photo Metadata Standard</a> in a machine-readable format.</p>
+</div>
+<div class="paragraph">
+<p>The TechReference uses the data model of key/value-pairs organized in hierarchical data structures, i.e.  the value of a pair may hold a data structure with one to many key/value-pairs and they are understood to reside at a lower hierachical level than the key/value-pair holding this structure.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="terminology-used-in-this-document"><a class="anchor" href="#terminology-used-in-this-document"></a>Terminology Used In This Document</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>property</strong>: A single object in a structure, in the TechReference it is a key/value-pair. It has a unique identifier (as key) and a value.</p>
+</li>
+<li>
+<p><strong>TechReference property</strong>: A property used by the TechReference data.</p>
+</li>
+<li>
+<p><strong>identifier</strong>: A string or numeric value to identify a property unambiguously in a specific scope.</p>
+</li>
+<li>
+<p><strong>value</strong>: The value of a property, of a key/value-pair. It can be a plain value (string, number) or a data structure making it a sub-structure of the property holding this value.</p>
+</li>
+<li>
+<p><strong>structure</strong>: A list of properties.</p>
+</li>
+<li>
+<p><strong>sub-structure</strong>: A structure being the value of a property.</p>
+</li>
+<li>
+<p><strong>top level property</strong>: A property of the structure at the top level of a hierarchical data model.</p>
+</li>
+<li>
+<p><strong>metadata property</strong>: A property defined by a metadata standard, e.g. IPTC Photo Metadata, Exif, PLUS, Dublin Core, &#8230;&#8203; . In most cases its specification is more complex than a key/value pair, including an identifier, a semantic definition, a data type, a user interface label, etc.</p>
+</li>
+<li>
+<p><strong>IPTC PMD property</strong>: A metadata property defined by the IPTC Photo Metadata Standard.</p>
+</li>
+<li>
+<p><strong>IPTC PMD structure</strong>: A structure of metadata properties as defined by the IPTC Photo Metadata Standard.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="top-level-properties"><a class="anchor" href="#top-level-properties"></a>Top Level Properties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The specifications provided by the TechReference data are grouped by top level properties.<br>
+These top level properties are used by the TechReference:</p>
+</div>
+<div class="paragraph">
+<p><strong>Covering the IPTC Photo Metadata Standard</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>ipmd_top</strong>: Group of the top level metadata properties of the <a href="#iptc-pmd-std">IPTC Photo Metadata Standard</a>. They are listed in the Metadata Properties sections of the IPTC Core schema and IPTC Extension schema chapters of the Standard&#8217;s specification document.</p>
+</li>
+<li>
+<p><strong>iptc_struct</strong>: Group of metadata structures of the <a href="#iptc-pmd-std">IPTC Photo Metadata Standard</a>. They are listed in the Metadata Structures sections of the IPTC Core schema and IPTC Extension schema chapters of the Standard&#8217;s specification document.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Covering Tags of the software ExifTools</strong></p>
+</div>
+<div class="paragraph">
+<p>The software <a href="#ExifTool">ExifTool</a> supports all properties of the IPTC Photo Metadata Standard. IPTC suggests to use it for reading and writing photo metadata.</p>
+</div>
+<div class="paragraph">
+<p>ExifTool identifies metadata properties by a Tag. Such a Tag has a Tag ID as identifer related to the property of a photo metadata standard. Each Tag resides in a tag group defined by ExifTool typically reflecting the standard the metadata property belongs to, e.g. "XMP" stands for the XMP format, "IPTC" stands for the IIM format. The identifier of such a tag group may be used as prefix of an ExifTool Tag using the format {<em>tag-group identifier</em>}<strong>:</strong>{<em>ExifTool Tag ID</em>}</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>et_topwithprefix</strong>: Group of ExifTool Tags with a prefix expressing the tag group it belongs to. Each ExifTool Tag corresponds to one of the top level properties of the IPTC Photo Metadata Standard and the properties of the <strong>ipmd_top</strong> group, see above.</p>
+</li>
+<li>
+<p><strong>et_topnoprefix</strong>: Group of the same ExifTool Tags as in et_topwithprefix, but having no prefix.</p>
+</li>
+<li>
+<p><strong>et_instructure</strong>: Group of ExifTool Tags corresponding to a metadata property in a structure defined by the <a href="#iptc-pmd-std">IPTC Photo Metadata Standard</a>. They are listed in the Metadata Structures sections of the IPTC Core schema and IPTC Extension schema chapters of the Standard specification document.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="techreference-top-level-property-data"><a class="anchor" href="#techreference-top-level-property-data"></a>TechReference top level property data</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Find below a list of all the data provided by each of the top level properties of the TechReference data.</p>
+</div>
+<div class="sect2">
+<h3 id="ipmd_top-data"><a class="anchor" href="#ipmd_top-data"></a><strong>ipmd_top</strong> data</h3>
+<div class="paragraph">
+<p>The structure of the ipmd_top TechReference property has a property for each top level metadata property specified by the <a href="#iptc-pmd-std">IPTC Photo Metadata Standard</a>, more than 55 currently. Such a TechReference property has an identifier (key) and a structure as value; what it defines is the same as the human-readable specification table of the corresponding top level property in the IPTC Photo Metadata Standard specification document. See the <a href="https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata#the-specification-template">specification table template</a> explaining what each of its rows define.<br>
+Find the details below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>identifier</strong>: Short alphanumeric string without whitespace. It is the same identifier as defined in the JSON Specs row in the specification table of this IPTC PMD property in the Standard&#8217;s specification document.</p>
+</li>
+<li>
+<p><strong>value&#8217;s structure</strong>: This structure supports all the properties listed below.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>name</strong>: Text naming the IPTC PMD property, taken from the Property Name row of the specification table of this property in the Standard&#8217;s specification document. Expect <strong>name</strong> for all IPTC PMD properties.</p>
+</li>
+<li>
+<p><strong>ipmdschema</strong>: The used values "IptcCore" and "IptcExtension" refer to the two schemas (= vocabularies) of the IPTC Photo Metadata Standard. Each IPTC photo metadata property is a member of one of these two schemas. Expect <strong>ipmdschema</strong> for all IPTC PMD properties.</p>
+</li>
+<li>
+<p><strong>sortorder</strong>: A short alphanumeric string supporting a lexical sort order of IPTC Photo Metadata property names across the schemas IPTC Core and IPTC Extension. Expect <strong>sortorder</strong> for all IPTC PMD properties.</p>
+</li>
+<li>
+<p><strong>ugtopic</strong>: Identifier of one of the topics grouping IPTC metadata properties in the <a href="#iptc-pmd-ug">IPTC Photo Metadata User Guide</a>. Find the used identifiers <a href="#ugtopic-values">below</a>. Expect <strong>ugtopic</strong> for all IPTC PMD properties.</p>
+</li>
+<li>
+<p><strong>specidx</strong>: Fragment of a URL starting with "#" and targeting the specification table of the corresponding IPTC PMD property in the IPTC Photo Metadata Standard web document. To get a full URL this fragment must be appended to this base URL: <a href="https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata" class="bare">https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata</a>. Expect <strong>specidx</strong> for all IPTC PMD properties.</p>
+</li>
+<li>
+<p><strong>datatype</strong>: Defines the data type of the value of the IPTC PMD property. Used data types: <em>string</em>, <em>number</em>, <em>struct</em>. If <em>struct</em> is used the structure used by the IPTC PMD property value is defined by <strong>dataformat</strong>. Expect <strong>datatype</strong> for all IPTC PMD properties.</p>
+</li>
+<li>
+<p><strong>dataformat</strong>: Defines a specific data format of the value of the IPTC PMD property if required. Used dataformats are: i/ with data type <em>string</em>: <em>date-time</em>, <em>uri</em>, <em>url</em>; ii/ with data type <em>number</em>: <em>integer</em>. If the data type is <em>struct</em> dataformat holds the identifier of the assigned IPTC PMD structure, these structures and their idenfiers can be found in the structure of the <strong><a href="#ipmd_struct-data">ipmd_struct</a></strong> top level property of the TechReference. Expect <strong>dataformat</strong> for all IPTC PMD properties with <em>struct</em> as data type.</p>
+</li>
+<li>
+<p><strong>propoccurrence</strong>: Defines how many times the IPTC PMD property may occur: <em>single</em>: not at all or one time, <em>multi</em>: not at all or multiple times. Expect <strong>propoccurrence</strong> for all IPTC PMD properties.</p>
+</li>
+<li>
+<p><strong>isrequired</strong>: Defines if this IPTC PMD property should be considered as semantically required when processing IPTC Photo Metadata. As the IPTC Photo Metadata Standard does not define any semantic requirement the value of this property is set to "0" in the TechReference. But for a personalized use of the TechReference <strong>isrequired</strong> can bet set to e.g. "1" for indicating to a metadata processor "this property must exist in our metadata".</p>
+</li>
+<li>
+<p><strong>XMPid</strong>: Identifier of the <a href="#ISO-XMP">XMP</a> property as defined by the IPTC PMD property. The XMP property identifier may appear in an  <a href="#ISO-XMP">XMP</a> packet using the format <em>namespace prefix<strong>:</strong>local identifier</em>. Expect <strong>XMPid</strong> for all IPTC PMD properties.</p>
+</li>
+<li>
+<p><strong>IIMid</strong>: Identifier of the <a href="#IPTC-IIM">IPTC IIM</a> Data Set (same as a property) as defined by the IPTC PMD property. The IIM Data Set identifier may appear in a block of <a href="#IPTC-IIM">IPTC IIM</a> data using the format <em>record number<strong>:</strong>data set number</em>. Expect <strong>IIMid</strong> only for IPTC PMD properties defining an IIM Data Set.</p>
+</li>
+<li>
+<p><strong>IIMname</strong>: Name of the <a href="#IPTC-IIM">IPTC IIM</a> Data Set of <strong>IIMid</strong>.</p>
+</li>
+<li>
+<p><strong>IIMmaxbytes</strong>: Integer value defining the maximum count of bytes which can be used with the IIM Data Set of <strong>IIMid</strong>. Be aware: non-ASCII characters in UTF-8 may use more than 1 byte per character. Expect <strong>IIMmaxbytes</strong> only for IPTC PMD properties with a datatype of <em>string</em>.</p>
+</li>
+<li>
+<p><strong>EXIFid</strong>: Numeric identifier (tag) of an <a href="#Exif">Exif</a> property mapped to the IPTC PMD property. The numeric value is expressed using the decimal numeral system. Expect <strong>EXIFid</strong> only for IPTC PMD properties being mapped to an Exif Tag.</p>
+</li>
+<li>
+<p><strong>SCHEMAid</strong>: Identifier of a <a href="#schema.org">Schema.org</a> metadata property mapped to the IPTC PMD property. The data type of the value is URL. Expect <strong>SCHEMAid</strong> only for IPTC PMD properties being mapped to a Schema.org property.</p>
+</li>
+<li>
+<p><strong>etXMP</strong>: <a href="#ExifTool">ExifTool</a> tag identifing the XMP property (see above: <strong>XMPid</strong>) of the IPTC PMD property. Expect <strong>etXMP</strong> for all IPTC PMD properties.</p>
+</li>
+<li>
+<p><strong>etIIM</strong>: <a href="#ExifTool">ExifTool</a> tag identifing the IIM data set (see above: <strong>IIMid</strong>) of the IPTC PMD property. Expect <strong>etIIM</strong> only for IPTC PMD properties with an <strong>IIMid</strong>.</p>
+</li>
+<li>
+<p><strong>etEXIF</strong>: <a href="#ExifTool">ExifTool</a> tag identifing the Exif property (see above: <strong>EXIFid</strong>) mapped to the IPTC PMD property. Expect <strong>etIIM</strong> only for IPTC PMD properties with an <strong>EXIFid</strong>.</p>
+</li>
+<li>
+<p><strong>etTag</strong>: <a href="#ExifTool">ExifTool</a> tag identifing a property without an explicitly related standard. Used only for a few ExifTool tags like the version tag covering the used ExifTool software.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="ugtopic-values"><a class="anchor" href="#ugtopic-values"></a>ugtopic values</h4>
+<div class="paragraph">
+<p>These values are used for the <strong>ugtopic</strong> TechReference property referring to a topic in the <a href="#iptc-pmd-ug">IPTC Photo Metadata User Guide</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>admin: <a href="https://www.iptc.org/std/photometadata/documentation/userguide/#_administration_and_commissioning_details">Administrative Details topic</a></p>
+</li>
+<li>
+<p>gimgcont: <a href="https://www.iptc.org/std/photometadata/documentation/userguide/#_general_image_content">General Image Content topic</a></p>
+</li>
+<li>
+<p>imgreg: <a href="https://www.iptc.org/std/photometadata/documentation/userguide/#_image_regions">Image Region topic</a></p>
+</li>
+<li>
+<p>licensing: <a href="https://www.iptc.org/std/photometadata/documentation/userguide/#_licensing_use_of_the_image">Licensing Use topic</a></p>
+</li>
+<li>
+<p>location: <a href="https://www.iptc.org/std/photometadata/documentation/userguide/#_locations">Location topic</a></p>
+</li>
+<li>
+<p>othings: <a href="https://www.iptc.org/std/photometadata/documentation/userguide/#_other_things_shown_in_the_image">Other Things Shown topic</a></p>
+</li>
+<li>
+<p>person: <a href="https://www.iptc.org/std/photometadata/documentation/userguide/#_persons_depicted_in_the_image">Persons Shown topic</a></p>
+</li>
+<li>
+<p>rights: <a href="https://www.iptc.org/std/photometadata/documentation/userguide/#_rights_information">Rights Information topic</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ipmd_struct-data"><a class="anchor" href="#ipmd_struct-data"></a><strong>ipmd_struct</strong> data</h3>
+<div class="paragraph">
+<p>The structure provided by the ipmd_struct property has a property for each metadata structure specified by the <a href="#iptc-pmd-std">IPTC Photo Metadata Standard</a>, more than 15 currently. Such a TechReference property has an identifier (key) and a structure as value. Find the details below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>identifier</strong>: Short alphanumeric string <strong>identifing the IPTC PMD structure</strong>; without whitespace, typically starting with uppercase. It is the same identifier as defined in the JSON Specs row in the specification table of this IPTC PMD structure in the Standard&#8217;s specification document.</p>
+</li>
+<li>
+<p><strong>value structure</strong>: the TechReference property representing a metadata structure has as value a sub-structure for the IPTC metadata properties defined for this IPTC PMD structure. Each of the properties has an identifier (key) and a structured value.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>identifier</strong>: short alphanumeric string <strong>identifing the IPTC PMD property inside the IPTC PMD structure</strong>; without any whitespace. It is the same as the identifier defined in JSON Specs row of the specification table of this property inside a structure in the IPTC Photo Metadata Standard.</p>
+</li>
+<li>
+<p><strong>value structure</strong>: The structure supports all the properties listed below.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>name</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>ipmdschema</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>sortorder</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>specidx</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>datatype</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>dataformat</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>propoccurrence</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>isrequired</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>XMPid</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>EXIFid</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>SCHEMAid</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>etXMP</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+<li>
+<p><strong>etTag</strong>: same as for <strong>ipmd_top</strong>, see above.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="special-case-altlang-structure"><a class="anchor" href="#special-case-altlang-structure"></a>Special case AltLang structure</h4>
+<div class="paragraph">
+<p>The structure identified by AltLang is different from all other structures. It covers the special feature of XMP metadata to provide semantically the same text value in alternative, different languages. To cover this feature an IPTC PMD property value of the type <em>struct</em> with the dataformat <em>AltLang</em> should be treated as a data structure with keys conforming to language identifiers as defined by <a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>. XMP specifies the special key <strong>x-default</strong> to indicate "the used language is the default language of the metadata", in fact this key is the most widely used in practice.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ipmd_-data-example"><a class="anchor" href="#ipmd_-data-example"></a>ipmd_* data example</h3>
+<div class="paragraph">
+<p>The hierarchical levels of the TechReference properties are made visible by &rarr; arrows.<br>
+The keys of the top level ipmd_&#8230;&#8203; TechReference properties are in bold.<br>
+The identifier of an IPTC PMD property or structure is shown in <em>italics</em>.<br>
+All other property keys follow the definition in the previous sections, the values are taken from a recent release of the TechReference data using the YAML format.<br>
+Comments are in {}-brackets, they do not appear in the TechReference file.<br>
+The IPTC PMD property examples cover one with an Alternate Language value, one with plain string value, and one with a structured value.</p>
+</div>
+<div class="paragraph">
+<p><strong>ipmd_top</strong>:<br>
+&rarr; <em>copyrightNotice</em>: {identifier of IPTC PMD property}<br>
+&rarr;&rarr; name: Copyright Notice<br>
+&rarr;&rarr; ipmdschema: IptcCore<br>
+&rarr;&rarr; sortorder: tp150<br>
+&rarr;&rarr; ugtopic: rights<br>
+&rarr;&rarr; specidx: '#copyright-notice'<br>
+&rarr;&rarr; datatype: struct<br>
+&rarr;&rarr; dataformat: AltLang<br>
+&rarr;&rarr; propoccurrence: single<br>
+&rarr;&rarr; isrequired: '0'<br>
+&rarr;&rarr; IIMid: 2:116<br>
+&rarr;&rarr; IIMname: Copyright Notice<br>
+&rarr;&rarr; IIMmaxbytes: 128<br>
+&rarr;&rarr; XMPid: dc:rights<br>
+&rarr;&rarr; EXIFid: '33432'<br>
+&rarr;&rarr; SCHEMAid: <a href="https://schema.org/copyrightNotice" class="bare">https://schema.org/copyrightNotice</a><br>
+&rarr;&rarr; etXMP: XMP-dc:Rights<br>
+&rarr;&rarr; etIIM: IPTC:CopyrightNotice<br>
+&rarr;&rarr; etEXIF: IFD0:Copyright<br>
+&rarr; <em>creditLine</em>: {identifier of IPTC metadata property}<br>
+&rarr;&rarr; name: Credit Line<br>
+&rarr;&rarr; ipmdschema: IptcCore<br>
+&rarr;&rarr; sortorder: tp230<br>
+&rarr;&rarr; ugtopic: rights<br>
+&rarr;&rarr; specidx: '#credit-line'<br>
+&rarr;&rarr; datatype: string<br>
+&rarr;&rarr; propoccurrence: single<br>
+&rarr;&rarr; isrequired: '0'<br>
+&rarr;&rarr; IIMid: 2:110<br>
+&rarr;&rarr; IIMname: Credit<br>
+&rarr;&rarr; IIMmaxbytes: 32<br>
+&rarr;&rarr; XMPid: photoshop:Credit<br>
+&rarr;&rarr; SCHEMAid: <a href="https://schema.org/creditText" class="bare">https://schema.org/creditText</a><br>
+&rarr;&rarr; etXMP: XMP-photoshop:Credit<br>
+&rarr;&rarr; etIIM: IPTC:Credit<br>
+&rarr; <em>imageCreators</em>: {identifier of IPTC PMD property}<br>
+&rarr;&rarr; name: Image Creator<br>
+&rarr;&rarr; ipmdschema: IptcExt<br>
+&rarr;&rarr; sortorder: tp350<br>
+&rarr;&rarr; ugtopic: rights<br>
+&rarr;&rarr; specidx: '#image-creator'<br>
+&rarr;&rarr; datatype: struct<br>
+&rarr;&rarr; dataformat: ImageCreator {see the structure with this identifer in the ipmd_struct region below}<br>
+&rarr;&rarr; propoccurrence: multi<br>
+&rarr;&rarr; isrequired: '0'<br>
+&rarr;&rarr; XMPid: plus:ImageCreator<br>
+&rarr;&rarr; etXMP: XMP-plus:ImageCreator<br>
+<strong>ipmd_struct</strong>:<br>
+&rarr; <em>ImageCreator</em>: {identifier of IPTC PMD structure}<br>
+&rarr;&rarr; <em>imageCreatorId</em>: {identifier of IPTC PMD property in the structure}<br>
+&rarr;&rarr;&rarr; name: Image Creator ID<br>
+&rarr;&rarr;&rarr; ipmdschema: PLUS<br>
+&rarr;&rarr;&rarr; sortorder: s3301<br>
+&rarr;&rarr;&rarr; specidx: '#image-creator-id'<br>
+&rarr;&rarr;&rarr; datatype: string<br>
+&rarr;&rarr;&rarr; propoccurrence: single<br>
+&rarr;&rarr;&rarr; isrequired: '0'<br>
+&rarr;&rarr;&rarr; XMPid: plus:ImageCreatorID<br>
+&rarr;&rarr;&rarr; etTag: ImageCreatorID<br>
+&rarr;&rarr; <em>imageCreatorName</em>: {identifier of a metadata property in the structure}<br>
+&rarr;&rarr;&rarr; name: Image Creator Name<br>
+&rarr;&rarr;&rarr; ipmdschema: PLUS<br>
+&rarr;&rarr;&rarr; sortorder: s3302<br>
+&rarr;&rarr;&rarr; specidx: '#image-creator-name'<br>
+&rarr;&rarr;&rarr; datatype: string<br>
+&rarr;&rarr;&rarr; propoccurrence: single<br>
+&rarr;&rarr;&rarr; isrequired: '0'<br>
+&rarr;&rarr;&rarr; XMPid: plus:ImageCreatorName<br>
+&rarr;&rarr;&rarr; EXIFid: '315'<br>
+&rarr;&rarr;&rarr; etTag: ImageCreatorName<br>
+&rarr;&rarr;&rarr; etEXIF: IFD0:Artist<br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="et_-data"><a class="anchor" href="#et_-data"></a><strong>et_* </strong> data</h3>
+<div class="paragraph">
+<p>The TechReference top level properties et_topwithprefix, et_topnoprefix and et_instructure provide a structure of <a href="#ExifTool">ExifTool</a> Tag properties. Each of the ExifTool Tag properties provides a structure with a single property. See a generic overview below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>et_topwithprefix</strong> or <strong>et_topnoprefix</strong> or <strong>et_instructure</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>ExifTool Tag</em></strong>: Identifier of an ExifTool property using a different naming in each of the top level properties (see below)</p>
+</li>
+<li>
+<p><strong><em>ExifTool property</em> value&#8217;s structure</strong>: It supports the property shown below.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>ipmdid</strong>: TechReference-identifier of the corresponding IPTC Photo Metadata property. This must be an <strong>identifier</strong> of an IPTC PMD property at the top level (<strong>ipmd_top</strong>) or in a structure (<strong>ipmd_struct</strong>).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>ExifTool top level properties and their naming of tags</strong>:</p>
+</div>
+<div class="paragraph">
+<p>ExifTool identifies metadata properties by a Tag. Such a Tag has a Tag ID as identifer related to the property of a photo metadata standard. Each Tag resides in a tag group defined by ExifTool but reflecting the standard the metadata property belongs to, e.g. "XMP" stands for the XMP format, "IPTC" stands for the IIM format. The identifier of such a tag group may be used as prefix of an ExifTool Tag using the format {<em>tag-group identifier</em>}<strong>:</strong>{<em>ExifTool Tag ID</em>}.</p>
+</div>
+<div class="paragraph">
+<p>The prefix used in the TechReference corresponds to prefixes supported by the "-G1" command line parameter of ExifTool named as "groups in family 1" by ExifTool.<br>
+Be aware that a different family of groups defines different prefixes.<br>
+Be aware that some software modules wrapping ExifTool in JavaScript, Python or C# (and other languages) use "-G" by default, which is "groups in family 0" with prefixes different from the "groups in familiy 1" prefixes - the "-G1" parameter needs to be set explicitly in most cases.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>et_topwithprefix</strong>: This structure provides ExifTool tags of properties corresponding to IPTC PMD properties at the top level, see <a href="#ipmd_top-data"><strong>ipmd_top</strong> data</a> above.<br>
+ExifTool tags in this structure are used with a prefix but <strong>a slightly different format</strong>: as this colon may cause syntactic problems in YAML keys IPTC decided to replace it by an underscore "_" making the format {<em>tag-group identifier</em>}<strong>_</strong>{<em>ExifTool Tag ID</em>}. This format is only used for the <strong><em>ExifTool Tag</em></strong> in the et_topwithprefix structure. Find ExifTool Tags with an underscore in the et_* data example below.</p>
+</li>
+<li>
+<p><strong>et_topnoprefix</strong>: This structure provides the same ExifTool tags as in the et_topwithprefix structure but without a prefix.</p>
+</li>
+<li>
+<p><strong>et_instructure</strong>: This structure provides ExifTool tags of properties corresponding to IPTC PMD properties in an IPTC PMD structure, see <a href="#ipmd_struct-data"><strong>ipmd_struct</strong> data</a> above.<br>
+ExifTool tags in this structure are used without a prefix.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="et_-data-example"><a class="anchor" href="#et_-data-example"></a>et_* data example</h3>
+<div class="paragraph">
+<p>The hierarchy levels of the TechReference properties are made visible by &rarr; arrows.<br>
+The keys of the top level et_&#8230;&#8203; TechReference properties are in bold.<br>
+The ExifTool Tag of a metadata property shown in <em>italics</em>.<br>
+All other property keys follow the definition in the previous section, the values are taken from a recent release of the TechReference using the YAML format.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>et_topwithprefix</strong>:<br>
+&rarr; <em>IPTC_City</em>:<br>
+&rarr;&rarr; ipmdid: cityName<br>
+&rarr; <em>XMP-photoshop_City</em>:<br>
+&rarr;&rarr; ipmdid: cityName<br>
+&rarr; <em>IFD0_Copyright</em>:<br>
+&rarr;&rarr; ipmdid: copyrightNotice<br>
+&rarr; <em>IPTC_CopyrightNotice</em>:<br>
+&rarr;&rarr; ipmdid: copyrightNotice<br>
+&rarr; <em>XMP-dc_Rights</em>:<br>
+&rarr;&rarr; ipmdid: copyrightNotice<br>
+<strong>et_topnoprefix</strong>:<br>
+&rarr; <em>City</em>:<br>
+&rarr;&rarr; ipmdid: cityName<br>
+&rarr; <em>Copyright</em>:<br>
+&rarr;&rarr; ipmdid: copyrightNotice<br>
+&rarr; <em>CopyrightNotice</em>:<br>
+&rarr;&rarr; ipmdid: copyrightNotice<br>
+&rarr; <em>Rights</em>:<br>
+&rarr;&rarr; ipmdid: copyrightNotice<br>
+<strong>et_instructure</strong>:<br>
+&rarr; <em>CiAdrExtadr</em>:<br>
+&rarr;&rarr; ipmdid: address<br>
+&rarr; <em>CiAdrCity</em>:<br>
+&rarr;&rarr; ipmdid: city<br>
+&rarr; <em>CiAdrCtry</em>:<br>
+&rarr;&rarr; ipmdid: country<br>
+&rarr; <em>CiEmailWork</em>:<br>
+&rarr;&rarr; ipmdid: emailwork</p>
+</div>
+</div>
+</div>
+</div>
+<h1 id="references" class="sect0"><a class="anchor" href="#references"></a>References</h1>
+<div class="sect1">
+<h2 id="related-standards"><a class="anchor" href="#related-standards"></a>Related standards</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="iptc-pmd-std"></a>IPTC Photo Metadata Standard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IPTC standard covering a rich set of metadata properties for a use with images, see <a href="https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata" class="bare">https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata</a>. It also defines how the properties can be embedded into image files using the XMP format (<a href="#Adobe-XMP">Adobe XMP</a>, <a href="#ISO-XMP">ISO XMP</a>) or the <a href="#IPTC-IIM">IPTC IIM</a> format.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="Adobe-XMP"></a>Adobe XMP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adobe Extensible Metadata Platform (XMP), see <a href="http://www.adobe.com/products/xmp/" class="bare">http://www.adobe.com/products/xmp/</a><br>
+Latest specification as of August 2016<br>
+These documents include the specification of the metadata schemas Dublin Core, XMP Rights management  and Photoshop which are referenced in this specification.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="Exif"></a>Exif</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exchangeable Image file Format (Exif), published by Camera &amp; Imaging Products Association (Japan). See all CIPA documents at <a href="https://www.cipa.jp/std/std-sec_e.html" class="bare">https://www.cipa.jp/std/std-sec_e.html</a>. Document "CIPA DC-008-Translation 2019 &#8230;&#8203; Exif Version 2.32" is used for this mapping.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="IPTC-IIM"></a>IPTC IIM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IPTC Information Interchange Model: <a href="http://www.iptc.org/IIM/" class="bare">http://www.iptc.org/IIM/</a> and
+<a href="http://www.iptc.org/std/IIM/4.2/specification/IIMV4.2.pdf" class="bare">http://www.iptc.org/std/IIM/4.2/specification/IIMV4.2.pdf</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="ISO-XMP"></a>ISO XMP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XMP Part 1 as ISO standard 16684-1. Latest version: Second Edition of 2019-04</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PLUS"></a>PLUS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Picture Licensing Universal System – PLUS: <a href="http://www.useplus.org" class="bare">http://www.useplus.org</a><br>
+PLUS specifications: <a href="http://www.useplus.com/useplus/standards.asp" class="bare">http://www.useplus.com/useplus/standards.asp</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="MetadataWG"></a>Metadata Working Group</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Guidelines for Handling Image Metadata v 2.0. This document was available at this URL until October 2018: <a href="http://www.metadataworkinggroup.com/specs/" class="bare">http://www.metadataworkinggroup.com/specs/</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="schema.org"></a>Schema.org Vocabulary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://schema.org/">Schema.org</a> is a collaborative, community activity behind a vocabulary for structured data on the Internet. See the <a href="https://schema.org/docs/schemas.html">overview of schemas</a> provided by this community.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="W3C-SKOS"></a>W3C-SKOS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SKOS Simple Knowledge Organization System<br>
+Overview: <a href="http://www.w3.org/2004/02/skos/" class="bare">http://www.w3.org/2004/02/skos/</a><br>
+Reference: <a href="http://www.w3.org/TR/skos-reference/" class="bare">http://www.w3.org/TR/skos-reference/</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="related-tools"><a class="anchor" href="#related-tools"></a>Related tools</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">About the tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get IPTC PMD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Website for making visible IPTC metadata embedded into an image file, available at <a href="https://getpmd.iptc.org" class="bare">https://getpmd.iptc.org</a> (it is run by IPTC). The process of matching found properties against the IPTC standard is based on the IPTC Photo Metadata Technical Reference.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="ExifTool"></a>ExifTool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Software for reading and writing photo metadata from and into an image file. Available as Perl library (can be installed on a Linux computer) or command line tool for Windows and MacOS. All about in at <a href="https://exiftool.org/" class="bare">https://exiftool.org/</a><br>
+As ExifTool supports all properties defined by the IPTC Photo Metadata standard IPTC suggests to use it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="iptc-pmd-ug"></a>IPTC Photo Metadata User Guide</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A document providing guidelines for a proper use of the IPTC Photo Metadata Standard, see <a href="https://www.iptc.org/std/photometadata/documentation/userguide/" class="bare">https://www.iptc.org/std/photometadata/documentation/userguide/</a>. The IPTC metadata properties are grouped by these topics: General Image Content, Persons Shown, Locations, Other Things Shown, Rights Information, Licensing Use, Administration Details, Image Region. Identifiers of these topics are used by the TechReference.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h1 id="fixed-errata" class="sect0"><a class="anchor" href="#fixed-errata"></a>Fixed Errata</h1>
+<div class="openblock partintro">
+<div class="content">
+List of errata in the IPTC Photo Metadata Technical Reference Documentation which were fixed after the initial release of version 1.0
+</div>
+</div>
+<div class="sect1">
+<h2 id="list-of-fixed-errata"><a class="anchor" href="#list-of-fixed-errata"></a>List of fixed errata</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Date</th>
+<th class="tableblock halign-left valign-top">Error</th>
+<th class="tableblock halign-left valign-top">How the error was fixed</th>
+</tr>
+</thead>
+</table>
+</div>
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>
